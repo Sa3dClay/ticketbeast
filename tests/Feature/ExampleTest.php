@@ -5,9 +5,17 @@ namespace Tests\Feature;
 use Carbon\Carbon;
 use Tests\TestCase;
 use App\Models\Concert;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
+use Tests\CreatesApplication;
 
-class ViewConcertListingTest extends TestCase
+class ViewConcertListingTest extends BaseTestCase
 {
+    use DatabaseMigrations;
+    use CreatesApplication;
+
+    public $baseUrl = 'http://127.0.0.1:8000';
+
     /**
      * @test
      */
@@ -28,12 +36,19 @@ class ViewConcertListingTest extends TestCase
             'additional'    => 'For other details call (55)'
         ]);
 
-        // Act
-        // View the concert listing
-        $this->visit('/concert/' . $concert->id);
-
-        // Assert
+        // Act & Assert
+        // Visit the concert listing
         // See the concert details
-        $this->see('Title');
+        $this->visit('/concerts/' . $concert->id)
+            ->see('Title')
+            ->see('Subtitle')
+            ->see('December 10, 2020, 8:00am')
+            ->see('35.20')
+            ->see('The Venue')
+            ->see('Venue Address')
+            ->see('Cairo')
+            ->see('On')
+            ->see('19177')
+            ->see('For other details call (55)');
     }
 }
