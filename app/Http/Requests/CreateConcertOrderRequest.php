@@ -24,7 +24,9 @@ class CreateConcertOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required'
+            'email'             => 'required|email',
+            'payment_token'     => 'required',
+            'ticket_quantity'   => 'required|integer|min:1'
         ];
     }
 }
