@@ -15,7 +15,8 @@ class CreateTicketsTable extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained('orders');
+            $table->foreignId('concert_id')->constrained('concerts');
+            $table->foreignId('order_id')->nullable()->constrained('orders');
             $table->timestamps();
         });
     }

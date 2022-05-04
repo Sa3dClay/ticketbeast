@@ -37,5 +37,9 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+        
+        $this->reportable(function (NotEnoughTicketsException $e) {
+            //
+        });
     }
 }

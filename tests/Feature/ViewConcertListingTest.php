@@ -52,7 +52,7 @@ class ViewConcertListingTest extends BaseTestCase
      */
     public function user_cannot_view_unpublished_concert_listing()
     {
-        $concert = Concert::factory()->unpublished()->create([]);
+        $concert = Concert::factory()->unpublished()->create();
 
         $this->get('concerts/' . $concert->id);
 
